@@ -1,13 +1,31 @@
+# Given a collection of distinct numbers, return all possible permutations.
+#
+# For example,
+# [1,2,3] have the following permutations:
+# [
+#   [1,2,3],
+#   [1,3,2],
+#   [2,1,3],
+#   [2,3,1],
+#   [3,1,2],
+#   [3,2,1]
+# ]
+
+
 def permutations(arr)
-  return [[]] if arr.empty?
+  return [arr] if arr.length <= 1
 
-  pivot = arr.take(1)
-  pieces = permutations(arr.drop(1))
-  results = []
+  answer = []
+  pivot = arr.shift
 
-  rest.each do |chunk|
-
+  perms = permutations(arr)
+  perms.each do |perm|
+    (0..perm.length).each do |i|
+      answer << perm[0...i] + [pivot] + perm[i..-1]
+    end
   end
+
+  answer
 end
 
 p permutations([1, 2, 3]) # => [[1, 2, 3], [2, 1, 3], [2, 3, 1], [3, 1, 2], [1, 3, 2], [3, 2, 1]]
