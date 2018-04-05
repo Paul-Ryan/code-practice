@@ -10,37 +10,50 @@
 #   [-1, -1, 2]
 # ]
 
-def three_sum(array)
-  sums = []
+# def three_sum(array)
+#   sums = []
+#
+#   (0...array.length - 2).each do |i|
+#     num1 = array[i]
+#     ((i + 1)...array.length - 1).each do |j|
+#       num2 = array[j]
+#       ((j + 1)...array.length).each do |k|
+#         num3 = array[k]
+#         sums << [num1, num2, num3] if num1 + num2 + num3 == 0
+#       end
+#     end
+#   end
+#
+#   sums
+# end
 
-  (0...array.length - 2).each do |i|
-    num1 = array[i]
-    ((i + 1)...array.length - 1).each do |j|
-      num2 = array[j]
-      ((j + 1)...array.length).each do |k|
-        num3 = array[k]
-        sums << [num1, num2, num3] if num1 + num2 + num3 == 0
+def three_sum(array)
+  results = []
+  # sorting the array allows avg O(n^2) time
+  array.sort!
+
+  # set a fixed number at each index to check other numbers against
+  (0..array.length - 3).each do |i|
+    fixed = array[i]
+    front_idx = i + 1
+    back_idx = array.length - 1
+
+    while front_idx < back_idx
+      front = array[front_idx]
+      back = array[back_idx]
+      sum = fixed + front + back
+
+      results << [fixed, front, back] if sum == 0
+      # move the front or back index forward or back depending on the current sum -- narrowing in on an answer
+      if sum > 0
+        back_idx -= 1
+      else
+        front_idx += 1
       end
     end
   end
 
-  sums
-end
-
-def three_sum(array)
-  results = []
-  return results if array.length < 3
-
-  i = 0
-  front_idx = i + 1
-  back_idx = array.length - 1
-
-  sorted = array.sort
-
-  while i < j
-
-  end
-
+  results
 end
 
 p three_sum([-1, 0, 1, 2, -1, -4])
