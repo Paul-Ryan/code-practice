@@ -11,14 +11,37 @@
 # ]
 
 def three_sum(array)
-  result = []
   sums = []
 
-  (0..array.length - 3).each do |i|
+  (0...array.length - 2).each do |i|
     num1 = array[i]
-    (i..array.length - 1).each do |j|
+    ((i + 1)...array.length - 1).each do |j|
       num2 = array[j]
-      sums << [num1, num2]
+      ((j + 1)...array.length).each do |k|
+        num3 = array[k]
+        sums << [num1, num2, num3] if num1 + num2 + num3 == 0
+      end
     end
   end
+
+  sums
 end
+
+def three_sum(array)
+  results = []
+  return results if array.length < 3
+
+  i = 0
+  front_idx = i + 1
+  back_idx = array.length - 1
+
+  sorted = array.sort
+
+  while i < j
+
+  end
+
+end
+
+p three_sum([-1, 0, 1, 2, -1, -4])
+# => [[-1, 0, 1], [-1, -1, 2]]
