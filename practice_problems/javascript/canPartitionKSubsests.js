@@ -28,9 +28,10 @@ var canPartitionKSubsets = function(nums, k) {
     let target = getTarget(nums, k);
     if (target === -1) { return false; }
 
-    let subsets = new Array(k);
+    let subsets = [...Array(k)].map(e => Array());
 
-    let numbers = nums.slice(0).sort();
+    //largest number first.
+    let numbers = nums.slice(0).sort((a, b) => b - a );
 
     // start with the largest value in our numbers array and work down to the smallest
     // always add the largest value possible to the current subset, until it equals the target
@@ -40,10 +41,30 @@ var canPartitionKSubsets = function(nums, k) {
     // k = 4, target = 5
     //  [1, (2), 2, 3, (3), 4, 5] (5) (4,1) (2,3)
 
-    for (let i = 0; i < numbers.length; i++) {
-        let current = numbers[i];
+    while (numbers.length > 1) {
 
     }
+
+    // while (numbers.length > 1) {
+    //   // set pointers to the front and back
+    //   // check the sum and move a pointer based on the result
+    //   // when the sum matches the target, push to the solution
+    //   let start_idx = numbers[numbers.length - 1];
+    //   let end_idx = numbers[0];
+    //   let sum = numbers[start_idx] + numbers[end_idx];
+    //
+    //   while (start_idx < end_idx) {
+    //     if (sum > target) {
+    //       end_idx++;
+    //     } else if (sum < target) {
+    //       start_idx++;
+    //     } else {
+    //       // won't work becuase we may have more than 2 items in a subset
+    //     }
+    //   }
+    // }
+
+
 };
 
 function getTarget(nums, k) {
