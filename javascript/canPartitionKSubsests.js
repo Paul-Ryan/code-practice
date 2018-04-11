@@ -40,31 +40,27 @@ var canPartitionKSubsets = function(nums, k) {
     // [5] [4, 1] [3, 2] [3, 2]
     // k = 4, target = 5
     //  [1, (2), 2, 3, (3), 4, 5] (5) (4,1) (2,3)
+    let subIdx = 0;
+    let tracker = 0;
 
-    while (numbers.length > 1) {
-
+    while (numbers.length > 0) {
+        if (subsets[subIdx].reduce((a, b) => a + b, 0) + numbers[0] <= target) {
+          subsets[subIdx].push(numbers.shift());
+          tracker = 0;
+        }
+        subIdx = (subIdx + 1) % k;
+        if (tracker >= k) { return false; }
+        tracker++;
     }
 
-    // while (numbers.length > 1) {
-    //   // set pointers to the front and back
-    //   // check the sum and move a pointer based on the result
-    //   // when the sum matches the target, push to the solution
-    //   let start_idx = numbers[numbers.length - 1];
-    //   let end_idx = numbers[0];
-    //   let sum = numbers[start_idx] + numbers[end_idx];
-    //
-    //   while (start_idx < end_idx) {
-    //     if (sum > target) {
-    //       end_idx++;
-    //     } else if (sum < target) {
-    //       start_idx++;
-    //     } else {
-    //       // won't work becuase we may have more than 2 items in a subset
-    //     }
-    //   }
-    // }
+    for (let i = 0; i < subsets.length; i++) {
+      let currentSet = subsets[i];
 
-
+      if (currentSet.reduce((a, b) => a + b, 0) !== target) {
+        return false;
+      }
+    }
+    return true;
 };
 
 function getTarget(nums, k) {
@@ -73,11 +69,12 @@ function getTarget(nums, k) {
         sum += nums[i];
     }
 
-    let int = Math.floor(sum/k) === sum / k;
+    // let int = Math.floor(sum/k) === sum / k;
+    let target = sum / k;
 
-    if (int) {
-        return sum / k;
+    if (Number.isInteger(target)) {
+        return target;
     } else {
         return -1;
     }
-}
+};
