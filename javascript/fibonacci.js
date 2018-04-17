@@ -30,6 +30,8 @@ function fibRec(num) {
 
 // Given a number n, print n-th Fibonacci Number.
 
+// this uses memoizaation
+
 function fib(num, memo) {
   memo = memo || {};
 
