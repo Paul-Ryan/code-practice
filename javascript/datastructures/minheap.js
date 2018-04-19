@@ -21,6 +21,7 @@ class minHeap {
     const temp = this.heap[this.size];
     this.heap[this.size] = this.heap[0];
     this.heap[0] = temp;
+
     const removed = this.heap.pop();
     this.heapifyDown(0);
 
@@ -29,22 +30,30 @@ class minHeap {
 
   // private functions
 
+// find children 2i + 1 and 2i + 2
   getSmallestChildIdx(idx) {
     const idx1 = 2 * idx + 1;
     const idx2 = idx1 + 1;
 
+    // no off by one because we reduce size of array before calc idx
     if (this.size < idx1) return null;
     if (this.size === idx1) return idx1;
 
-    return Math.min(idx1, idx2);
+    if (this.heap[idx1] <= this.heap[idx2]) {
+      return idx1;
+    } else {
+      return idx2;
+    }
   }
 
+  // find parents - use integer division: i / 2 and (i - 2) / 2
   getParentIdx(idx) {
     return parseInt((idx - 1) / 2 );
   }
 
   heapifyDown(idx) {
     if (this.size === 1) return idx;
+
     const childIdx = this.getSmallestChildIdx(idx);
     if (childIdx === null) return idx;
 
@@ -56,6 +65,7 @@ class minHeap {
       const temp = current;
       this.heap[idx] = child;
       this.heap[childIdx] = temp;
+
       this.heapifyDown(childIdx);
     }
     return idx;
@@ -77,31 +87,22 @@ class minHeap {
   }
 }
 
-// find children 2i + 1 and 2i + 2
 
-// find parents - use integer division: i / 2 and (i - 2) / 2
+// TESTS
 
 const heap = new minHeap();
+
+const arr= [];
+
+for (let i = 15; i > 0; i--) {
+  heap.insert(i);
+}
 console.log(heap);
-heap.insert(5);
-heap.insert(4);
-heap.insert(6);
-heap.insert(6);
-heap.insert(5);
-heap.insert(2);
-heap.insert(1);
-heap.insert(4);
-heap.insert(10);
-heap.insert(3);
-heap.insert(8);
-heap.insert(9);
-heap.insert(5);
-heap.insert(11);
-heap.insert(1);
+// console.log(heap.insert(8));
+heap.extract();
 console.log(heap);
-console.log(heap.extract());
-console.log(heap);
-console.log(heap.extract());
-console.log(heap);
-console.log(heap.extract());
+heap.extract();
+heap.extract();
+heap.extract();
+heap.extract();
 console.log(heap);

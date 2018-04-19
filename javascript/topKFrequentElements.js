@@ -32,8 +32,8 @@ var topKFrequent = function(nums, k) {
       if (pk.peek < count[key]) {
         pk.insert(node);
         pk.delete();
+        }
       }
-    }
 
     // return an array of the pk's keys
     const answer = [];
