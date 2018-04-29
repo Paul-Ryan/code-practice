@@ -87,6 +87,19 @@ class minHeap {
   }
 }
 
+// http://rosettacode.org/wiki/Sorting_algorithms/Heapsort#JavaScript
+function heapSort(array) {
+
+}
+
+// heapSort helper functions: buildMinHeap and heapify
+function buildMinHeap(array) {
+
+}
+
+function heapify(idx, heap) {
+
+}
 
 // TESTS
 
