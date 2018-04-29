@@ -17,7 +17,6 @@ var addTwoNumbers = function(l1, l2) {
 
   while (l1 || l2 || carry) {
     let value = 0;
-
     if (l1 && l2) {
       value = l1.val + l2.val + carry;
     } else if (l1) {
@@ -27,13 +26,11 @@ var addTwoNumbers = function(l1, l2) {
     } else {
       value = carry;
     }
-
+    carry = value >= 10 ? 1 : 0;
     prevNode.next = new ListNode(value % 10);
-    value >= 10 ? carry = 1 : 0;
     prevNode = prevNode.next;
     l1 = l1 ? l1.next : l1;
     l2 = l2 ? l2.next : l2;
   }
-
   return listHead.next;
 };
