@@ -13,12 +13,16 @@ var lengthOfLongestSubstring = function(string) {
     // declare ls
     // create a window length 1 to check
     let sub = "", size = 1, i = 0;
+    while (i + size <= string.length) {
+      sub = string.slice(i, i + size);
 
+      if (noRepeats(sub))
+    }
     // loop while i + window length < string length
 
 };
 
-    function countLetters(string) {
+    function noRepeats(string) {
         const count = {};
         for (let i = 0; i < string.length; i++) {
           let letter = string[i];
@@ -31,12 +35,6 @@ var lengthOfLongestSubstring = function(string) {
         return true;
     }
 
-
-console.log(countLetters(""));
-console.log(countLetters("aaa"));
-console.log(countLetters("apple"));
-console.log(countLetters("aple"));
-console.log(countLetters("a"));
 console.log(lengthOfLongestSubstring('apple')); // 3
 console.log(lengthOfLongestSubstring('aple')); // 4
 console.log(lengthOfLongestSubstring('bbbbb')); // 1
