@@ -10,22 +10,27 @@ require 'byebug'
 
 def longest_common_substring(str1, str2)
   longest = ""
-  idx = 0
 
-  while idx + longest.length + 1 <= str2.length
-    last_idx = idx + longest.length + 1
-    if str2.include?(str1[idx, last_idx])
-      debugger
-      longest = str1[idx, last_idx]
-      idx -= 1
+  start_idx = 0
+  while start_idx < str1.length
+    # don't consider strings too short to be longest
+    len = longest.length + 1
+
+    while (start_idx + len) <= str1.length
+      end_idx = start_idx + len
+      substring = str1[start_idx...end_idx]
+      longest = substring if str2.include?(substring)
+
+      len += 1
     end
 
-    idx += 1
+    start_idx += 1
   end
 
   longest
 end
 
-# p longest_common_substring('banana', 'ana') # ana
-# p longest_common_substring('a', 'b') # ''
+p longest_common_substring('banana', 'ana') # ana
+p longest_common_substring('a', 'b') # ''
 p longest_common_substring('yuppiee', 'guppie') # uppie
+p longest_common_substring('abazzaaabb', 'abaczzaaacc') # zzaaa
